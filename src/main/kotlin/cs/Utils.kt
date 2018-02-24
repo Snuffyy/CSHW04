@@ -3,9 +3,9 @@ package cs
 class Utils {
 
     companion object {
-        val ASCII_ENCODE: Map<Int, Char> = getASCIIencode()
-        val ASCII_DECODE: Map<Char, Int> = getASCIIdecode()
-        val ASCII_LEN: Int = ASCII_ENCODE.size
+        val ASCII_ENCODE_TABLE: Map<Int, Char> = getASCIIencode()
+        val ASCII_DECODE_TABLE: Map<Char, Int> = getASCIIdecode()
+        val ASCII_TABLE_LEN: Int = ASCII_ENCODE_TABLE.size
     }
 }
 
@@ -28,3 +28,5 @@ fun getASCIIdecode(): Map<Char, Int> {
 
     return map
 }
+
+fun isOfSameLen(msg: String, key: String): Boolean = msg.length == key.length

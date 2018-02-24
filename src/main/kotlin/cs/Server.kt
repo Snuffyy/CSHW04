@@ -15,7 +15,25 @@ fun Application.main() {
     install(CallLogging)
     install(Routing) {
         get("/") {
-            call.respondText("My Example Blog2", ContentType.Text.Html)
+            call.respondText("You are not supposed to be here...", ContentType.Text.Plain)
+        }
+        get("/sha") {
+            val msg = call.request.queryParameters["m"] ?: ""
+            call.respondText(toSHA512(msg), ContentType.Text.Plain)
+        }
+        get("/md5") {
+            val hash = call.request.queryParameters["h"] ?: ""
+            call.respondText(decrypt(hash), ContentType.Text.Plain)
+        }
+        get("/otp/d") {
+            val msg = call.request.queryParameters["m"] ?: ""
+            val key = call.request.queryParameters["k"] ?: ""
+            call.respondText(decrypt(msg, key), ContentType.Text.Plain)
+        }
+        get("/otp/e") {
+            val msg = call.request.queryParameters["m"] ?: ""
+            val key = call.request.queryParameters["k"] ?: ""
+            call.respondText(encrypt(msg, key), ContentType.Text.Plain)
         }
     }
 }
