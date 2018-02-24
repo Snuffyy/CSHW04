@@ -41,7 +41,6 @@
     <orderEntry type="library" name="Gradle: io.ktor:ktor-http:0.9.1" level="project" />
     <orderEntry type="library" name="Gradle: io.ktor:ktor-utils:0.9.1" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.21" level="project" />
-    <orderEntry type="library" name="Gradle: xerces:xercesImpl:2.6.2-jaxb-1.0.6" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.21" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-reflect:1.2.21" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:0.22.1" level="project" />
