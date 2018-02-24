@@ -12,7 +12,7 @@ class Utils {
 fun getASCIIencode(): Map<Int, Char> {
     val map = mutableMapOf<Int, Char>()
 
-    for (ascii in 0..95) {
+    for (ascii in 0..94) {
         map[ascii] = (ascii + 32).toChar()
     }
 
@@ -22,7 +22,7 @@ fun getASCIIencode(): Map<Int, Char> {
 fun getASCIIdecode(): Map<Char, Int> {
     val map = mutableMapOf<Char, Int>()
 
-    for (ascii in 0..95) {
+    for (ascii in 0..94) {
         map[(ascii + 32).toChar()] = ascii
     }
 
