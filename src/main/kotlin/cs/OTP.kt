@@ -5,7 +5,7 @@ import cs.Utils.Companion.ASCII_ENCODE_TABLE
 import cs.Utils.Companion.ASCII_TABLE_LEN
 
 
-fun encrypt(msg: String, key: String = ""): String {
+fun encrypt(msg: String, key: String): String {
 
     if (!isOfSameLen(msg, key)) return ""
 
