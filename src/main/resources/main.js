@@ -32,7 +32,7 @@ function update(radio) {
     case "1":
       console.log("MD5");
       type = "/md5/";
-      btn.innerHTML = "encode";
+      btn.innerHTML = "decode";
       break;
     case "2":
       console.log("otpE");
@@ -57,17 +57,12 @@ function process() {
     url += `&k=${key.value}`
   }
 
+  console.log(url);
+
   get(url, (resp) => {
     console.log(resp);
     out.innerHTML = resp;
   });
-
-  clear();
-}
-
-function clear() {
-  msg.value = "";
-  key.value = "";
 }
 
 function get(url, fun) {

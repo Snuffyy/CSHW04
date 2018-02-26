@@ -21,7 +21,7 @@ fun Application.main() {
             call.respondText(toSHA512(msg), ContentType.Text.Plain)
         }
         get("/md5") {
-            val hash = call.request.queryParameters["h"] ?: ""
+            val hash = call.request.queryParameters["m"] ?: ""
             call.respondText(decrypt(hash), ContentType.Text.Plain)
         }
         get("/otp/d") {
