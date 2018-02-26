@@ -85,7 +85,7 @@ function get(url, fun) {
     if (req.readyState == 4 && req.status == 200) {
       fun(req.response);
     }
-    else {
+    else if (status != 200) {
       out.innerHTML = "";
 
       setTimeout(function () {
