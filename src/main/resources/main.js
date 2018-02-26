@@ -1,3 +1,5 @@
+
+
 const sha = document.getElementById("sha");
 const md5 = document.getElementById("md5");
 const otpE = document.getElementById("otpE");
@@ -11,6 +13,9 @@ const out = document.getElementById("out");
 const loader = document.getElementById("loader");
 
 let type;
+
+let msgLen = 0;
+let keyLen = 0;
 
 const baseUrl = "http://dixionary.eu";
 
@@ -31,21 +36,25 @@ function update(radio) {
       console.log("SHA");
       type = "/sha/";
       btn.innerHTML = "encode";
+      btn.disabled = false;
       break;
     case "1":
       console.log("MD5");
       type = "/md5/";
       btn.innerHTML = "decode";
+      btn.disabled = false;
       break;
     case "2":
       console.log("otpE");
       type = "/otp/e/";
       btn.innerHTML = "encrypt";
+      btn.disabled = true;
       break;
     case "3":
       console.log("otpD");
       type = "/otp/d/";
       btn.innerHTML = "decrypt";
+      btn.disabled = true;
       break;
   }
 }
@@ -58,6 +67,11 @@ function process() {
   if (!key.disabled) {
     // append key
     url += `&k=${key.value}`
+
+    if (keyLen != msgLen) {
+      console.log("Should be of same len!");
+      return;
+    }
   }
 
   console.log(url);
@@ -79,13 +93,68 @@ function get(url, fun) {
     if (req.readyState == 4 && req.status == 200) {
       fun(req.response)
     }
+    else{
+      loader.classList.add("hide");
+      out.classList.remove("hide");
+    }
   };
 
   req.open("GET", url, true);
   req.send(null);
 }
 
+function isOfSameLen(keyLen, msgLen) {
+  return keyLen == msgLen;
+}
+
+function isDelPressed(event) {
+  const key = event.keyCode || event.charCode;
+  return key == 8 || key == 46;
+}
+
+msg.onkeydown = (event) => {
+  if (type == "/sha/" || type == "/md5/") {
+    return;
+  }
+
+  if (isDelPressed(event)) {
+    msgLen--;
+  }
+  else {
+    msgLen++;
+  }
+
+  if (isOfSameLen(msgLen, keyLen)) {
+    btn.disabled = false;
+  }
+  else {
+    btn.disabled = true;
+  }
+};
+
+key.onkeydown = (event) => {
+  if (type == "sha" || type == "md5") {
+    return;
+  }
+
+  if (isDelPressed(event)) {
+    keyLen--;
+  }
+  else {
+    keyLen++;
+  }
+
+  if (isOfSameLen(msgLen, keyLen)) {
+    btn.disabled = false;
+  }
+  else {
+    btn.disabled = true;
+  }
+};
+
 function clear() {
   msg.value = "";
   key.value = "";
+  msgLen = 0;
+  keyLen = 0;
 }
