@@ -55,7 +55,6 @@
       </div>
     </div>
     <div class="row">
-      <!--TODO: Add disabled to input if not OTP-->
       <div class="input-field col s12" style="  margin-bottom: 0;
   margin-top: 0;">
         <i class="material-icons prefix">vpn_key</i>
@@ -67,16 +66,21 @@
 </div>
 
 <!--Button-->
-<button id="btn" class="btn waves-effect waves-light" type="submit" name="action" onclick="process()">Encode
+<button id="btn" class="btn waves-effect waves-light" type="submit" name="action"
+        onclick="process()">Encode
   <i class="material-icons right">send</i>
 </button>
 
+
+<!--Loader-->
+<div id="loader" class="progress hide" style="margin-top: 25px;">
+  <div class="indeterminate"></div>
+</div>
 
 <!--Output-->
 <div class="row">
   <div class="col s12" style="padding: 0;">
     <div id="out" class="card-panel teal hide" style="margin-top: 20px;">
-     Out <!--<span id="out" class="white-text hide">Output</span>-->
     </div>
   </div>
 </div>

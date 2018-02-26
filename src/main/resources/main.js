@@ -8,6 +8,7 @@ const key = document.getElementById("key");
 
 const btn = document.getElementById("btn");
 const out = document.getElementById("out");
+const loader = document.getElementById("loader");
 
 let type;
 
@@ -69,8 +70,11 @@ function process() {
 }
 
 function get(url, fun) {
+  loader.classList.remove("hide");
+
   let req = new XMLHttpRequest();
   req.onreadystatechange = () => {
+    loader.classList.add("hide");
     if (req.readyState == 4 && req.status == 200) {
       fun(req.response)
     }
