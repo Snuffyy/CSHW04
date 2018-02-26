@@ -1,5 +1,3 @@
-
-
 const sha = document.getElementById("sha");
 const md5 = document.getElementById("md5");
 const otpE = document.getElementById("otpE");
@@ -42,7 +40,7 @@ function update(radio) {
       console.log("MD5");
       type = "/md5/";
       btn.innerHTML = "decode";
-      btn.disabled = false;
+      btn.disabled = true;
       break;
     case "2":
       console.log("otpE");
@@ -95,7 +93,7 @@ function get(url, fun) {
     if (req.readyState == 4 && req.status == 200) {
       fun(req.response);
     }
-    else{
+    else {
       out.innerHTML = "";
     }
   };
@@ -108,50 +106,48 @@ function isOfSameLen(keyLen, msgLen) {
   return keyLen == msgLen;
 }
 
-function isDelPressed(event) {
-  const key = event.keyCode || event.charCode;
-  return key == 8 || key == 46;
+function onMsg() {
+  if (type == "/sha/") {
+    return;
+  }
+
+  msgLen = msg.value.length;
+
+  if (type == "/md5/") {
+    if (msgLen != 32) {
+      btn.disabled = true;
+    }
+    else {
+      btn.disabled = false;
+    }
+  }
+  else {
+    if (isOfSameLen(msgLen, keyLen) && msgLen > 0) {
+      btn.disabled = false;
+    }
+    else {
+      btn.disabled = true;
+    }
+  }
+
+  console.log("msg: " + msgLen);
+  console.log("key: " + keyLen);
 }
 
-msg.onkeydown = (event) => {
-  if (type == "/sha/" || type == "/md5/") {
+function onKey() {
+  if (type == "/sha/") {
     return;
   }
 
-  if (isDelPressed(event)) {
-    msgLen--;
-  }
-  else {
-    msgLen++;
-  }
+  keyLen = key.value.length;
 
-  if (isOfSameLen(msgLen, keyLen)) {
+  if (isOfSameLen(msgLen, keyLen)  && msgLen > 0) {
     btn.disabled = false;
   }
   else {
     btn.disabled = true;
   }
-};
-
-key.onkeydown = (event) => {
-  if (type == "sha" || type == "md5") {
-    return;
-  }
-
-  if (isDelPressed(event)) {
-    keyLen--;
-  }
-  else {
-    keyLen++;
-  }
-
-  if (isOfSameLen(msgLen, keyLen)) {
-    btn.disabled = false;
-  }
-  else {
-    btn.disabled = true;
-  }
-};
+}
 
 function clear() {
   msg.value = "";
