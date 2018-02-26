@@ -40,6 +40,9 @@ fun Application.main() {
         get("/materialize.min.css") {
             call.respondFile(File("src/main/resources/materialize.min.css"))
         }
+        get("/materialize.min.js") {
+            call.respondFile(File("src/main/resources/materialize.min.js"))
+        }
         get("/styles.css") {
             call.respondFile(File("src/main/resources/styles.css"))
         }
