@@ -70,6 +70,8 @@ function process() {
   out.classList.add("hide");
 
   get(url, (resp) => {
+    loader.classList.add("hide");
+    out.classList.remove("hide");
     console.log(resp);
     out.innerHTML = resp;
   });
@@ -79,13 +81,13 @@ function get(url, fun) {
 
   let req = new XMLHttpRequest();
   req.onreadystatechange = () => {
-    loader.classList.add("hide");
-    out.classList.remove("hide");
 
     if (req.readyState == 4 && req.status == 200) {
       fun(req.response);
     }
     else if (req.readyState == 4 && status != 200) {
+      loader.classList.add("hide");
+      out.classList.remove("hide");
       out.innerHTML = "";
 
       setTimeout(function () {
