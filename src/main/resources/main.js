@@ -57,9 +57,10 @@ function process() {
     url += `&k=${key.value}`
   }
 
-  console.log(get(url, (resp) => {
+  get(url, (resp) => {
     console.log(resp);
-  }));
+    out.innerHTML = resp;
+  });
 
   clear();
 }
