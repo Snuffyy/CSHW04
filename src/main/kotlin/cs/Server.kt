@@ -3,6 +3,7 @@ package cs
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
+import io.ktor.features.CORS
 import io.ktor.features.DefaultHeaders
 import io.ktor.http.ContentType
 import io.ktor.response.respondText
@@ -11,10 +12,8 @@ import io.ktor.routing.get
 
 fun Application.main() {
     install(DefaultHeaders)
+    install(CORS)
     install(Routing) {
-        get("/") {
-            call.respondText("You are not supposed to be here...", ContentType.Text.Plain)
-        }
         get("/sha") {
             val msg = call.request.queryParameters["m"] ?: ""
             call.respondText(toSHA512(msg), ContentType.Text.Plain)

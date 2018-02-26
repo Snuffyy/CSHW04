@@ -1,0 +1,18 @@
+html, body {
+  width: 90%;
+  margin: 0 auto;
+}
+
+@media only screen and (min-width: 680px) {
+  html, body {
+    width: 75%;
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  html, body {
+    width: 60%;
+    margin: 0 auto;
+  }
+}
