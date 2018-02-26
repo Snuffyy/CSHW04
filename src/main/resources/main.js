@@ -34,25 +34,22 @@ function update(radio) {
       console.log("SHA");
       type = "/sha/";
       btn.innerHTML = "encode";
-      btn.disabled = false;
       break;
     case "1":
       console.log("MD5");
       type = "/md5/";
       btn.innerHTML = "decode";
-      btn.disabled = true;
       break;
     case "2":
       console.log("otpE");
       type = "/otp/e/";
       btn.innerHTML = "encrypt";
-      btn.disabled = true;
+
       break;
     case "3":
       console.log("otpD");
       type = "/otp/d/";
       btn.innerHTML = "decrypt";
-      btn.disabled = true;
       break;
   }
 }
@@ -64,12 +61,7 @@ function process() {
 
   if (!key.disabled) {
     // append key
-    url += `&k=${key.value}`
-
-    if (keyLen != msgLen) {
-      console.log("Should be of same len!");
-      return;
-    }
+    url += `&k=${key.value}`;
   }
 
   console.log(url);
@@ -95,6 +87,10 @@ function get(url, fun) {
     }
     else {
       out.innerHTML = "";
+
+      setTimeout(function () {
+        out.classList.add("hide");
+      }, 3000);
     }
   };
 
@@ -107,10 +103,6 @@ function isOfSameLen(keyLen, msgLen) {
 }
 
 function onMsg() {
-  if (type == "/sha/") {
-    return;
-  }
-
   msgLen = msg.value.length;
 
   if (type == "/md5/") {
@@ -121,6 +113,14 @@ function onMsg() {
       btn.disabled = false;
     }
   }
+  else if (type == "/sha/") {
+    if (msgLen > 0) {
+      btn.disabled = false;
+    }
+    else {
+      btn.disabled = true;
+    }
+  }
   else {
     if (isOfSameLen(msgLen, keyLen) && msgLen > 0) {
       btn.disabled = false;
@@ -129,19 +129,13 @@ function onMsg() {
       btn.disabled = true;
     }
   }
-
-  console.log("msg: " + msgLen);
-  console.log("key: " + keyLen);
 }
 
 function onKey() {
-  if (type == "/sha/") {
-    return;
-  }
 
   keyLen = key.value.length;
 
-  if (isOfSameLen(msgLen, keyLen)  && msgLen > 0) {
+  if (isOfSameLen(msgLen, keyLen) && msgLen > 0) {
     btn.disabled = false;
   }
   else {
@@ -154,4 +148,5 @@ function clear() {
   key.value = "";
   msgLen = 0;
   keyLen = 0;
+  btn.disabled = true;
 }
