@@ -63,6 +63,7 @@ function process() {
   console.log(url);
 
   get(url, (resp) => {
+    loader.classList.add("hide");
     out.classList.remove("hide");
     console.log(resp);
     out.innerHTML = resp;
@@ -71,10 +72,10 @@ function process() {
 
 function get(url, fun) {
   loader.classList.remove("hide");
+  out.classList.add("hide");
 
   let req = new XMLHttpRequest();
   req.onreadystatechange = () => {
-    loader.classList.add("hide");
     if (req.readyState == 4 && req.status == 200) {
       fun(req.response)
     }
