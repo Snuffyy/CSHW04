@@ -3,6 +3,14 @@ html, body {
   margin: 0 auto;
 }
 
+#out {
+  color: white;
+}
+
+span {
+  display: inline-block;
+}
+
 @media only screen and (min-width: 680px) {
   html, body {
     width: 75%;

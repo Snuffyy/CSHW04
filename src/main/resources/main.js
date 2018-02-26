@@ -23,6 +23,8 @@ function update(radio) {
     key.disabled = false;
   }
 
+  clear();
+
   switch (radio.value) {
     case "0":
       console.log("SHA");
@@ -60,6 +62,7 @@ function process() {
   console.log(url);
 
   get(url, (resp) => {
+    out.classList.remove("hide");
     console.log(resp);
     out.innerHTML = resp;
   });
@@ -75,4 +78,9 @@ function get(url, fun) {
 
   req.open("GET", url, true);
   req.send(null);
+}
+
+function clear() {
+  msg.value = "";
+  key.value = "";
 }
