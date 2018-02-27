@@ -1,5 +1,8 @@
 package cs
 
+/**
+ * Utils class with handy functions.
+ */
 class Utils {
 
     companion object {
@@ -9,6 +12,9 @@ class Utils {
     }
 }
 
+/**
+ * Generate encode table.
+ */
 fun getASCIIencode(): Map<Int, Char> {
     val map = mutableMapOf<Int, Char>()
 
@@ -19,6 +25,9 @@ fun getASCIIencode(): Map<Int, Char> {
     return map
 }
 
+/**
+ * Generate decode table.
+ */
 fun getASCIIdecode(): Map<Char, Int> {
     val map = mutableMapOf<Char, Int>()
 
@@ -29,4 +38,7 @@ fun getASCIIdecode(): Map<Char, Int> {
     return map
 }
 
+/**
+ * Check if 2 strings are of the same length.
+ */
 fun isOfSameLen(msg: String, key: String): Boolean = msg.length == key.length

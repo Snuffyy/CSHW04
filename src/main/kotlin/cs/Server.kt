@@ -12,17 +12,23 @@ import io.ktor.routing.Routing
 import io.ktor.routing.get
 import java.io.File
 
+/**
+ * Main function for the server.
+ */
 fun Application.main() {
     install(DefaultHeaders)
     install(CORS)
     install(Routing) {
+
+        // Api endpoints
+
         get("/sha") {
             val msg = call.request.queryParameters["m"] ?: ""
             call.respondText(toSHA512(msg), ContentType.Text.Plain)
         }
         get("/md5") {
             val hash = call.request.queryParameters["m"] ?: ""
-            call.respondText(decrypt(hash), ContentType.Text.Plain)
+            call.respondText(decode(hash), ContentType.Text.Plain)
         }
         get("/otp/d") {
             val msg = call.request.queryParameters["m"] ?: ""
@@ -34,6 +40,9 @@ fun Application.main() {
             val key = call.request.queryParameters["k"] ?: ""
             call.respondText(encrypt(msg, key), ContentType.Text.Plain)
         }
+
+        // Load frontend
+
         get("/") {
             call.respondFile(File("src/main/resources/index.html"))
         }
@@ -48,6 +57,9 @@ fun Application.main() {
         }
         get("/main.js") {
             call.respondFile(File("src/main/resources/main.js"))
+        }
+        get("/logo.png") {
+            call.respondFile(File("src/main/resources/logo.png"))
         }
     }
 }
